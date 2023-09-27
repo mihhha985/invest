@@ -1,0 +1,11 @@
+[
+  {"href": "/main", "text": "Моя торговля"},
+  {"href": "/single-account", "text": "Единый счёт"},
+  {"href": "/finance-result", "text": "Финансовый результат"},
+  {"href": "/deposite-history", "text": "Эквити"},
+  {"href": "/mentor-single-account", "text": "Начисления за учеников"},
+  {"href": "/withdraw-request", "text": "Заявки на выплату"},
+  {"href": "/profile", "text": "Профиль"},
+  {"href": "/security", "text": "Безопасность"},
+  {"href": "/referral-program", "text": "Реферальная программа"}
+]

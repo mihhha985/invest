@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  min-width: fit-content;
+}
+
+table {
+  min-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.auth-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgb(236 237 240);
+}
+
+.site-container{
+  min-height: 100vh;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 140px 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+
+  .header{
+    grid-area: header;
+    background-color: rgb(255 255 255);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    z-index: 1;
+  }
+
+  .sidebar{
+    width: 100%;
+    grid-area: sidebar;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    z-index: 1;
+  }
+
+  .content{
+    width: 100%;
+    grid-area: main;
+    background-color: rgb(236 237 240);
+    padding: 40px;
+  }
+
+  .mobile-menu{
+    display: none;
+    grid-area: header;
+    background-color: rgb(255 255 255);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    z-index: 1;
+  }
+
+  .btn{
+    @apply inline-block rounded-md shadow-md text-center text-white font-semibold py-2 px-4;
+
+    &.btn-primary{
+      @apply bg-sky-600 hover:bg-sky-500;
+    }
+
+    &.btn-default{
+      @apply bg-gray-100 hover:bg-gray-300 text-gray-800;
+    }
+  }
+
+  .month{
+    @apply text-gray-100 bg-slate-500 text-xs rounded-md py-1 px-2;
+
+    &.active{
+      @apply text-green-950 bg-gray-300 opacity-80 hover:opacity-100;
+    }
+  }
+
+  .li-table-wrapper{
+    @apply overflow-y-auto rounded-md shadow-md border-b border-gray-300 bg-zinc-50;
+
+    .price{
+      @apply text-right;
+    }
+
+    .bg-good{
+      @apply bg-yellow-100;
+    }
+
+    table{
+      @apply w-full;
+
+        thead{
+          @apply border-solid border-b border-gray-800;
+        
+          th{
+            @apply text-center text-gray-600 text-base font-light;
+          }
+        }
+
+        tfoot td{
+          @apply text-center text-gray-800 text-base font-semibold p-2;
+        }
+    }
+  }
+
+  .input{
+    @apply w-full text-gray-600 text-base font-semibold p-2 rounded-md border shadow;
+  }
+}
+
+@media (max-width: 992px) { 
+  .site-container{
+    min-height: 100vh;
+    background-color: rgb(236 237 240);
+    display: grid;
+    overflow: hidden;
+    grid-template-columns: 1fr;
+    grid-template-rows: 120px 1fr;
+    grid-template-areas:
+      "header"
+      "main";
+
+      .sidebar{
+        display: none;
+      }
+    
+      .header{
+        display: none;
+      }
+    
+      .mobile-menu{
+        display: block;
+        grid-area: header;
+        background-color: rgb(255 255 255);
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        z-index: 1;
+      }
+
+      .content{
+        width: 100%;
+        grid-area: main;
+        background-color: rgb(236 237 240);
+        padding: 20px;
+      }
+  }
+}
