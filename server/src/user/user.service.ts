@@ -72,7 +72,7 @@ export class UsersService {
         throw new Error('User not found');
       }
 
-      const newtoken = await jwt.sign({id:user.id}, process.env.JWT_SECRET, {expiresIn:'1h'});
+      const newtoken = await jwt.sign({id:user.id}, process.env.JWT_SECRET, {expiresIn:'1m'});
       return {
         token: newtoken,
         user: {id:user.id, email:user.email, firstName:user.firstName, lastName:user.lastName, secondName:user.secondName}
