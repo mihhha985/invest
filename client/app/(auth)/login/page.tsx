@@ -54,8 +54,9 @@ function Page() {
         <input type="password" placeholder="Код авторизации" />
         <h6>Если включена двухфакторная авторизация</h6>
       </div>
-      <div className="text-indigo-600 self-end">
-        <Link href="/register">Нет аккаунта? Зарегистрируйтесь.</Link>
+      <div className="w-full flex justify-between text-indigo-600">
+        <Link href="/restore">Забыли пароль?</Link>
+        <Link href="/register">Регистрация</Link>
       </div>
       <div className="btn-box">
         <button onClick={login}>Войти</button>

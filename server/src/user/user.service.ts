@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { IUserLogin, IUserRegister, IUserToken } from './dto/user.register.dto';
+import { MailerService } from '@nestjs-modules/mailer';
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const jwt = require('jsonwebtoken');
@@ -12,6 +13,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    private readonly mailerService: MailerService
   ) {}
 
   async getAll(): Promise<any[]> {
@@ -78,6 +80,34 @@ export class UsersService {
         user: {id:user.id, email:user.email, firstName:user.firstName, lastName:user.lastName, secondName:user.secondName}
       };
       
+    }catch(e){
+      throw e;
+    }
+  }
+
+  async restore(email: string, code: string): Promise<number> {
+    try{
+      const user = await this.usersRepository.findOneOrFail({where:{email:email}});
+
+      await this.mailerService.sendMail({
+          to: email, // list of receivers
+          from: 'mihhha985@yandex.ru', // sender address
+          subject: 'Востоновление пароля ✔', // Subject line
+          html: '<h3>' + code + '</h3>',
+          text: code
+        });
+
+        return user.id
+    }catch(e){
+      throw e;
+    }
+  }
+
+  async changePassword(pass:string, id:number): Promise<void> {
+    pass = await bcrypt.hash(pass, 5);
+    
+    try{
+      await this.usersRepository.update(id, {password:pass});
     }catch(e){
       throw e;
     }
